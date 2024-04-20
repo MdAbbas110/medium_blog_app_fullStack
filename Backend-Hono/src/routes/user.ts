@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { compareSync, hashSync } from 'bcrypt-ts';
 import { decode, sign, verify } from 'hono/jwt';
+import { signupSchema, signinInput } from 'abbas110-zod-validations';
 //we can't initialize the prisma client in global but inside each routes, coz can't access the .env from outside without c of hono
 
 export const userRoute = new Hono<{
@@ -13,11 +14,20 @@ export const userRoute = new Hono<{
 }>();
 
 userRoute.post('/signup', async (c) => {
+  const body = await c.req.json();
+  const { success } = signupSchema.safeParse(body);
+
+  if (!success) {
+    c.status(403);
+    return c.json({
+      msg: 'inputs are not correct',
+    });
+  }
+
   const prisma = new PrismaClient({
     datasourceUrl: c.env?.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const body = await c.req.json();
   const hashedPassword = hashSync(body.password, 8);
 
   try {
@@ -46,8 +56,16 @@ userRoute.post('/signin', async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
-
   const body = await c.req.json();
+  const { success } = signinInput.safeParse(body);
+  //zod authentication fails
+  if (!success) {
+    c.status(403);
+    return c.json({
+      msg: 'inputs are not correct',
+    });
+  }
+
   try {
     //this user will return a object with hashed password now we will decode the hashed and see if password is same as db
     const user = await prisma.user.findFirst({
