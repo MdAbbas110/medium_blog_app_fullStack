@@ -17,14 +17,21 @@ const app = new Hono<{
 app.use('/api/v1/blog/*', async (c, next) => {
 
 	const header = c.req.header('authorization') || '';
+	if (!header) {
+		c.status(401);
+		return c.json({ error: "unauthorized" });
+	}
 
-	const response = await (verify(header, c.env.JWT_SECRET))
+	const token = header.split(" ")[1]
+	const response = await (verify(token, c.env.JWT_SECRET))
 	if (response.id) {
+		
 		next()
 	} else{
 		c.status(403)
 		return c.json({error: 'unauthorized'})
 	}
+	c.set('userId', response.id);
 	await next()
   })
 
