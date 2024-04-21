@@ -3,9 +3,9 @@ import SignupQuote from '../components/SignupQuote';
 
 const Signup = () => {
   return (
-    <div className="w-full grid grid-cols-2 ">
+    <div className="w-full md:grid flex flex-col md:grid-cols-2 ">
       <div className="">
-        <Auth />
+        <Auth type="signup" />
       </div>
       <SignupQuote />
     </div>
