@@ -3,7 +3,7 @@ import { ChangeEvent, useState } from 'react';
 import { Signup } from 'abbas110-zod-validations';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster, toast } from 'sonner';
 
 const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
   const navigate = useNavigate();
@@ -19,11 +19,18 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
         `${BACKEND_URL}api/v1/user${type === 'signup' ? '/signup' : '/signin'}`,
         postInputs
       );
-      console.log(response);
-      toast.success('Successfully toasted!');
-
+      // console.log(response);
       const jwt = response.data;
-      localStorage.setItem('token', jwt);
+      if (response.data) {
+        toast('signup successful');
+      }
+      if (!response.data) {
+        toast('signin failed try again');
+        <Toaster />;
+      }
+      const tokenSet = jwt.split(' ');
+      console.log(tokenSet);
+      localStorage.setItem('token', tokenSet[2]);
       navigate('/blogs');
     } catch (error) {
       console.log(error);
@@ -92,7 +99,6 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
           >
             {type === 'signup' ? 'Signup' : 'Signin'}
           </button>
-          <Toaster position="top-center" reverseOrder={false} />
         </div>
       </div>
     </div>

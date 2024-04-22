@@ -86,10 +86,7 @@ userRoute.post('/signin', async (c) => {
 
     const jwtToke = await sign({ id: user.id }, c.env.JWT_SECRET);
 
-    return c.json({
-      msg: 'user logged in success',
-      token: jwtToke,
-    });
+    return c.text(`Jwt Secret ${jwtToke}`);
   } catch (error) {
     console.log(error);
     return c.text('something went wrong');

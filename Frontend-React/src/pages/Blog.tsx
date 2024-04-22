@@ -1,9 +1,8 @@
+// import useSingleBlog from "../hooks/useSingleBlog";
+
 const Blog = () => {
-  return (
-    <div>
-      <div>Blog 1</div>
-    </div>
-  );
+  // useSingleBlog()
+  return <div></div>;
 };
 
 export default Blog;

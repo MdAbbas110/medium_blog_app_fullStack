@@ -1,15 +1,34 @@
 import BlogCards from '../components/BlogCards';
+import Navbar from '../components/Navbar';
+import useBlogs from '../hooks/useBlogs';
 
 const AllBlogs = () => {
+  const { loading, blogs } = useBlogs();
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
   return (
-    <div>
-      <BlogCards
-        content="ladfaldslfv adsfklnlk  ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk ladfaldslfv adsfklnlk opjanlkdfggnklasdviparlnk opankdfsghpasdnklvn avb awrgasdkvapofs wre cv"
-        title="akldsnklfahi pojfdskjpadfopj vnlkadhpifkn"
-        authorName="abbas"
-        publishDate={'12/12/2020'}
-      />
-    </div>
+    <>
+      <Navbar />
+      <div className="flex justify-center">
+        <div className="my-10 flex flex-col gap-5">
+          {blogs.map((blog) => {
+            return (
+              <div key={blog.id}>
+                <BlogCards
+                  id={blog.id}
+                  authorName={blog.author.name || 'Anonymous'}
+                  title={blog.tiitle}
+                  content={blog.content}
+                  publishDate={'12/12/2020'}
+                />
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </>
   );
 };
 
