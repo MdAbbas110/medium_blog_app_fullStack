@@ -17,7 +17,7 @@ const SingleBlogPage = ({ title, content, name }: BlogDetails) => {
   return (
     <>
       <Navbar />
-      <div className=" flex justify-center mt-16 px-16">
+      <div className=" flex justify-center pt-20 mt-16 px-16">
         <div className="flex flex-col md:grid md:grid-cols-12 w-full max-w-screen-2xl ">
           <div className=" col-span-8 ">
             <h1 className="md:text-4xl 2xl font-extrabold">{title}</h1>

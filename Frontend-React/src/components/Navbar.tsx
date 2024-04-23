@@ -4,7 +4,7 @@ import logo from '../assets/medium.png';
 
 const Navbar = () => {
   return (
-    <div className="w-full px-20 py-2 flex items-center justify-between border-b border-gray-400  ">
+    <div className="w-full fixed top-0 bg-white px-20 py-2 flex items-center justify-between border-b border-gray-400  ">
       <Link to={'/blogs'}>
         <img className="md:w-52 w-32 h-9 md:h-14" src={logo} alt="logo" />
       </Link>
