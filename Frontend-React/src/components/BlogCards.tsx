@@ -43,7 +43,7 @@ const BlogCards = ({
             )} minutes(s) read`}</h3>
           </div>
         </div>
-        <div className="border-b border-gray-300 h-1 max-w-2xl"></div>
+        <div className="border-b border-lime-300 h-1 max-w-2xl"></div>
       </div>
     </Link>
   );

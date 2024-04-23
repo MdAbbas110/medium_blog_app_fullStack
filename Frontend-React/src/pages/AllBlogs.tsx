@@ -1,4 +1,5 @@
 import BlogCards from '../components/BlogCards';
+import BlogScletons from '../components/BlogScletons';
 import Navbar from '../components/Navbar';
 import useBlogs from '../hooks/useBlogs';
 
@@ -6,7 +7,15 @@ const AllBlogs = () => {
   const { loading, blogs } = useBlogs();
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <div className="flex justify-center flex-col gap-5">
+        <Navbar />
+        <BlogScletons />
+        <BlogScletons />
+        <BlogScletons />
+        <BlogScletons />
+      </div>
+    );
   }
   return (
     <>
