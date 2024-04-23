@@ -7,6 +7,8 @@ import { Toaster, toast } from 'sonner';
 
 const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const [postInputs, setPostInputs] = useState<Signup>({
     name: '',
     username: '',
@@ -14,6 +16,7 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
   });
 
   async function sendRequest() {
+    setLoading(true);
     try {
       const response = await axios.post(
         `${BACKEND_URL}api/v1/user${type === 'signup' ? '/signup' : '/signin'}`,
@@ -31,6 +34,7 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
       const tokenSet = jwt.split(' ');
       console.log(tokenSet);
       localStorage.setItem('token', tokenSet[2]);
+      setLoading(false);
       navigate('/blogs');
     } catch (error) {
       console.log(error);
@@ -50,7 +54,7 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
             ? 'Already have an account?'
             : 'Need to create account?'}
           <Link
-            to={type === 'signup' ? '/signin' : '/signup'}
+            to={type === 'signup' ? '/' : '/signup'}
             className="font-medium tracking-tight cursor-pointer underline"
           >
             {type === 'signup' ? ' Login now' : ' Signup now'}
@@ -93,9 +97,12 @@ const Auth = ({ type }: { type: 'signup' | 'signin' }) => {
             }
           />
           <button
+            disabled={loading}
             onClick={sendRequest}
             type="button"
-            className="text-white bg-black hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-md font-medium transition-all px-5 py-2.5 me-2 mb-2  "
+            className={`${
+              loading ? 'bg-gray-400  cursor-wait' : 'bg-black'
+            } text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-300 rounded-lg text-md font-medium transition-all px-5 py-2.5 me-2 mb-2 `}
           >
             {type === 'signup' ? 'Signup' : 'Signin'}
           </button>

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 interface BlogCardsProp {
   authorName: string;
@@ -15,6 +16,12 @@ const BlogCards = ({
   publishDate,
   id,
 }: BlogCardsProp) => {
+  //function to display parse the raw html into an actual html page with stylings
+  const renderHTML = (htmlString: any) => {
+    const sanitizedHTML = DOMPurify.sanitize(htmlString);
+    return { __html: sanitizedHTML };
+  };
+
   return (
     <Link to={`/blog/${id}`}>
       <div className="max-w-4xl  px-20 border-gray-600">
@@ -33,9 +40,13 @@ const BlogCards = ({
             <h1 className="text-xl font-semibold">{`${
               title.length >= 80 ? title.slice(0, 80) + '...' : title
             }`}</h1>
-            <p className=" text-slate-500 pt-2 font-normal">
-              {content.slice(0, 120) + '...'}
-            </p>
+
+            <div
+              className=" text-slate-500 pt-3 font-normal"
+              dangerouslySetInnerHTML={renderHTML(
+                content.slice(0, 120) + '...'
+              )}
+            />
           </div>
           <div>
             <h3 className="text-sm font-thin text-slate-500">{`${Math.ceil(
