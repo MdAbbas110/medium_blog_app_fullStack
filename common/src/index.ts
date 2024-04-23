@@ -16,7 +16,7 @@ export const signinInput = z.object({
 export type SigninInput = z.infer<typeof signinInput>;
 
 export const createBlogInput = z.object({
-  title: z.string(),
+  tiitle: z.string(),
   content: z.string(),
 });
 

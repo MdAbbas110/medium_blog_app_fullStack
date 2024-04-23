@@ -36,14 +36,14 @@ blogRoute.use('/*', async (c, next) => {
 
 blogRoute.post('/', async (c) => {
   const body = await c.req.json();
-  const { success } = createBlogInput.safeParse(body);
+  // `const { success } = createBlogInput.safeParse(body);
 
-  if (!success) {
-    c.status(403);
-    return c.json({
-      msg: 'title descriptions correct',
-    });
-  }
+  // if (!success) {
+  //   c.status(403);
+  //   return c.json({
+  //     msg: 'title descriptions correct',
+  //   });
+  // }`
 
   const userID = c.get('userID');
   const prisma = new PrismaClient({
@@ -146,6 +146,7 @@ blogRoute.get('/:id', async (c) => {
         id: Number(id),
       },
       select: {
+        id: true,
         tiitle: true,
         content: true,
         author: {

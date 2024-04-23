@@ -17,16 +17,16 @@ const useSingleBlog = ({ id }: { id: string }) => {
 
   useEffect(() => {
     const fetchBlog = async () => {
-      const res = await axios.get(`${BACKEND_URL}api/v1/blog/${id}`, {
-        headers: {
-          Authorization: localStorage.getItem('token'),
-        },
-      });
-      if (res.data) {
+      try {
+        const res = await axios.get(`${BACKEND_URL}api/v1/blog/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
         setSingleBlog(res.data.blog);
         setLoading(false);
-      } else {
-        alert('something went wrong');
+      } catch (error) {
+        console.log(error);
       }
     };
     fetchBlog();
