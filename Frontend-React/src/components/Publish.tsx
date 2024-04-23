@@ -3,7 +3,7 @@ import JoditEditor from 'jodit-react';
 import Navbar from './Navbar';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Publish = () => {
   const editor = useRef<any>(null); // Use 'any' type for editor ref if no specific type is available

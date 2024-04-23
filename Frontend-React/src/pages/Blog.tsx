@@ -25,8 +25,11 @@ const Blog = () => {
   return (
     <div>
       <SingleBlogPage
+        // @ts-ignore:
         name={singleBlog.author.name}
+        // @ts-ignore
         title={singleBlog.tiitle}
+        // @ts-ignore:
         content={singleBlog.content}
       />
     </div>

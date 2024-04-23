@@ -2,7 +2,7 @@
 
 Welcome to our full stack blog project repository! This project enables users to create, edit, and view blog articles through a dynamic web application.
 
-![Homepage](./Frontend-React/src/assets/Screenshot 2024-04-23 194149.png)
+![Homepage](./Frontend-React/src/assets/Screenshot%202024-04-23%20194149.png)
 
 ## Features
 
