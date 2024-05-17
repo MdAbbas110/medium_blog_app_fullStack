@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { BACKEND_URL } from '../config';
+import { useRecoilState } from 'recoil';
+import { blogState } from '../recoil/atoms';
 
 interface Blog {
   id: number;
@@ -14,6 +16,7 @@ interface Blog {
 const useBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [blogUpdate, setBlogUpdate] = useRecoilState(blogState);
 
   useEffect(() => {
     const fetchBlogs = async () => {
