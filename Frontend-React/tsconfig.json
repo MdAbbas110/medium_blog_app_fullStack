@@ -7,7 +7,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Changed to 'node' for better Jest compatibility
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -20,6 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"],
+  "include": ["src", "jest.config.ts"], // Added jest.config.ts to include Jest configuration
+  "exclude": ["node_modules"], // Excluding node_modules
   "references": [{ "path": "./tsconfig.node.json" }]
 }
