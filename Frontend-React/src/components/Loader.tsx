@@ -1,7 +1,1 @@
-export Loader = ( ) => {
-  return  (
-    <div>
-    Loading..............
-    </div>
-  )
-}
+// A spin animation needs to be added for the blogs to show..
