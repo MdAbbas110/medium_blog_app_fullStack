@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "abbas110-zod-validations": "^1.0.0",
-    "axios": "^1.6.8",
+    "axios": "^1.8.2",
     "dompurify": "^3.1.0",
     "jodit-react": "^4.0.25",
     "react": "^18.2.0",
